@@ -6,486 +6,246 @@
   <title>Fridge Drink Tracker</title>
   <style>
     :root {
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --text: #172033;
-      --muted: #667085;
-      --border: #d9deea;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --danger: #dc2626;
-      --good: #15803d;
-      --shadow: 0 10px 30px rgba(16, 24, 40, .08);
+      color-scheme: dark;
+      --bg: #070b12;
+      --panel: #101827;
+      --panel-2: #172033;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #263244;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    header {
-      padding: 24px 18px 16px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: -0.04em;
-    }
-
-    .subhead {
-      color: var(--muted);
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px 40px;
-    }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font: inherit;
-      background: white;
-      color: var(--text);
-    }
-
-    textarea { min-height: 92px; resize: vertical; }
-
-    button {
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform .08s ease, opacity .12s ease, background .12s ease;
-    }
-
-    button:active { transform: scale(.98); }
-    button:disabled { opacity: .45; cursor: not-allowed; }
-
-    .primary { background: var(--primary); color: white; }
-    .primary:hover { background: var(--primary-dark); }
-    .secondary { background: #e8edf8; color: #23324d; }
-    .danger { background: #fee2e2; color: var(--danger); }
-    .success { background: #dcfce7; color: var(--good); }
-    .ghost { background: transparent; color: var(--muted); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-
-    .photo {
-      height: 170px;
-      background: linear-gradient(135deg, #dbeafe, #fef3c7);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      font-size: 3rem;
-    }
-
-    .photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .brand { color: var(--muted); font-size: .95rem; }
-    .name { font-size: 1.3rem; font-weight: 850; line-height: 1.1; }
-    .desc { color: var(--muted); font-size: .95rem; line-height: 1.35; min-height: 38px; }
-
-    .quantity-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 12px;
-      background: #f8fafc;
-      border-radius: 16px;
-    }
-
-    .quantity {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-
-    .low { color: #b45309; }
-    .empty { color: var(--danger); }
-
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: auto;
-    }
-
-    .actions .wide { grid-column: 1 / -1; }
-
-    dialog {
-      border: 0;
-      border-radius: 24px;
-      width: min(560px, calc(100vw - 28px));
-      box-shadow: 0 24px 80px rgba(16, 24, 40, .28);
-      padding: 0;
-    }
-
-    dialog::backdrop { background: rgba(15, 23, 42, .45); }
-
-    .modal {
-      padding: 18px;
-    }
-
+    body { margin: 0; background: radial-gradient(circle at top, #111827 0, var(--bg) 46rem); color: var(--text); }
+    header { padding: 24px 18px 12px; max-width: 1120px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.06em; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 1rem; }
+    main { max-width: 1120px; margin: 0 auto; padding: 16px 18px 40px; }
+    .toolbar { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 18px 0; }
+    @media (min-width: 760px) { .toolbar { grid-template-columns: 1fr auto auto; align-items: center; } }
+    input, textarea { width: 100%; background: #0b1220; border: 1px solid var(--border); border-radius: 14px; color: var(--text); padding: 14px 15px; font: inherit; outline: none; }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,.16); }
+    button { border: 0; border-radius: 14px; padding: 13px 16px; font-weight: 800; cursor: pointer; color: var(--text); background: var(--panel-2); min-height: 46px; }
+    button:hover { filter: brightness(1.1); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .primary { background: linear-gradient(135deg, #0284c7, #22c55e); }
+    .take { background: linear-gradient(135deg, #dc2626, #f97316); font-size: 1rem; }
+    .success { background: #15803d; }
+    .ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .danger { background: #7f1d1d; }
+    .status { color: var(--muted); min-height: 24px; margin: 12px 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 16px; }
+    .card { background: rgba(16,24,39,.92); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+    .photo { height: 180px; background: #0f172a; display: flex; align-items: center; justify-content: center; color: var(--muted); overflow: hidden; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .content { padding: 15px; }
+    .brand { color: var(--accent); font-size: .8rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .name { font-size: 1.25rem; font-weight: 900; margin: 4px 0 2px; }
+    .flavor { color: var(--muted); margin-bottom: 10px; }
+    .desc { color: #cbd5e1; min-height: 42px; }
+    .count { display: flex; align-items: baseline; justify-content: space-between; margin: 14px 0; padding: 12px; border-radius: 16px; background: #0b1220; border: 1px solid var(--border); }
+    .count strong { font-size: 2.2rem; line-height: 1; }
+    .low { color: var(--warning); font-weight: 900; }
+    .out { color: var(--danger); font-weight: 900; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .actions .take { grid-column: 1 / -1; }
+    dialog { width: min(680px, calc(100vw - 24px)); border: 1px solid var(--border); border-radius: 24px; background: #0b1220; color: var(--text); padding: 0; box-shadow: var(--shadow); }
+    dialog::backdrop { background: rgba(0,0,0,.7); }
+    .modal { padding: 18px; }
     .modal h2 { margin: 0 0 14px; }
-    .form-grid { display: grid; gap: 12px; }
-    .form-row { display: grid; gap: 6px; }
-    label { color: var(--muted); font-weight: 700; font-size: .9rem; }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
-
-    .empty-state {
-      background: white;
-      border: 1px dashed var(--border);
-      border-radius: 24px;
-      padding: 28px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .footer-tools {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-      justify-content: center;
-    }
-
-    @media (max-width: 650px) {
-      .toolbar { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .photo { height: 210px; }
-      button { padding: 14px; }
-    }
+    .form-grid { display: grid; gap: 10px; }
+    @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .span { grid-column: 1 / -1; } }
+    .modal-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+    .empty { color: var(--muted); padding: 24px; border: 1px dashed var(--border); border-radius: 18px; text-align: center; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Fridge Drink Tracker</h1>
-    <p class="subhead">Scan the QR code, pick a drink, tap “Drink One,” and the count updates.</p>
+    <h1>Fridge Drinks</h1>
+    <p class="subtitle">Scan, choose a drink, tap Drink One. Counts are shared through Google Sheets.</p>
   </header>
-
   <main>
     <section class="toolbar">
-      <input id="search" type="search" placeholder="Search by drink, brand, flavor, or description" />
-      <button class="secondary" id="showLow">Low Stock</button>
-      <button class="primary" id="addDrink">Add Drink</button>
+      <input id="search" placeholder="Search name, brand, or flavor" />
+      <button id="refresh" class="ghost">Refresh</button>
+      <button id="addDrink" class="primary">Add Drink</button>
     </section>
-
-    <section id="drinkGrid" class="grid" aria-live="polite"></section>
-
-    <section class="footer-tools">
-      <button class="secondary" id="exportData">Export Backup</button>
-      <button class="secondary" id="importData">Import Backup</button>
-      <button class="danger" id="resetData">Reset Sample Data</button>
-      <input id="importFile" type="file" accept="application/json" hidden />
-    </section>
+    <div id="status" class="status">Loading drinks...</div>
+    <section id="drinks" class="grid"></section>
   </main>
 
   <dialog id="drinkDialog">
     <form method="dialog" class="modal" id="drinkForm">
       <h2 id="dialogTitle">Add Drink</h2>
       <div class="form-grid">
-        <input type="hidden" id="drinkId" />
-        <div class="form-row">
-          <label for="name">Name or Flavor</label>
-          <input id="name" required placeholder="Coke Zero, Peach Vibe, Lime" />
-        </div>
-        <div class="form-row">
-          <label for="brand">Brand</label>
-          <input id="brand" required placeholder="Coca-Cola, Celsius, LaCroix" />
-        </div>
-        <div class="form-row">
-          <label for="quantity">Quantity</label>
-          <input id="quantity" type="number" min="0" step="1" required />
-        </div>
-        <div class="form-row">
-          <label for="photo">Photo URL</label>
-          <input id="photo" placeholder="Paste an image URL, or leave blank" />
-        </div>
-        <div class="form-row">
-          <label for="description">Brief Description</label>
-          <textarea id="description" placeholder="Zero sugar cola, lime sparkling water, energy drink, etc."></textarea>
-        </div>
+        <input id="drinkId" type="hidden" />
+        <label>Name<input id="name" required /></label>
+        <label>Brand<input id="brand" required /></label>
+        <label>Flavor<input id="flavor" /></label>
+        <label>Quantity<input id="quantity" type="number" min="0" step="1" required /></label>
+        <label>Low Stock Threshold<input id="threshold" type="number" min="0" step="1" value="3" /></label>
+        <label class="span">Photo URL<input id="photo" placeholder="https://..." /></label>
+        <label class="span">Description<textarea id="description" rows="3"></textarea></label>
       </div>
       <div class="modal-actions">
-        <button type="button" class="ghost" id="cancelDialog">Cancel</button>
-        <button type="submit" class="primary">Save Drink</button>
+        <button type="button" id="deleteDrink" class="danger">Delete</button>
+        <button type="button" id="cancel" class="ghost">Cancel</button>
+        <button type="submit" class="primary">Save</button>
       </div>
     </form>
   </dialog>
 
   <script>
-    const STORAGE_KEY = "fridge-drink-tracker-v1";
-    const LOW_STOCK_LIMIT = 3;
+    // Paste your deployed Google Apps Script Web App URL here.
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbycitE_CDKjAhzzM3W9snawq4I5SWdRQZ0SHV9-sqoDqPtfFFbIu75-AcNtsxDx1F4tpg/exec";
 
-    const sampleDrinks = [
-      {
-        id: crypto.randomUUID(),
-        name: "Coke Zero",
-        brand: "Coca-Cola",
-        quantity: 8,
-        photo: "",
-        description: "Zero sugar cola."
-      },
-      {
-        id: crypto.randomUUID(),
-        name: "Peach Vibe",
-        brand: "Celsius",
-        quantity: 5,
-        photo: "",
-        description: "Sparkling peach energy drink."
-      },
-      {
-        id: crypto.randomUUID(),
-        name: "Lime",
-        brand: "LaCroix",
-        quantity: 3,
-        photo: "",
-        description: "Lime sparkling water."
-      }
-    ];
+    const state = { drinks: [], query: "", editingId: null };
+    const $ = (id) => document.getElementById(id);
 
-    let drinks = loadDrinks();
-    let lowOnly = false;
+    function setStatus(message) { $("status").textContent = message || ""; }
+    function isConfigured() { return GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_YOUR"); }
+    function slugify(value) { return String(value || "drink").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
-    const grid = document.getElementById("drinkGrid");
-    const search = document.getElementById("search");
-    const dialog = document.getElementById("drinkDialog");
-    const form = document.getElementById("drinkForm");
+    async function api(action, payload = {}) {
+      if (!isConfigured()) throw new Error("Add your Google Apps Script Web App URL to index.html first.");
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action, ...payload })
+      });
+      const data = await response.json();
+      if (!data.ok) throw new Error(data.error || "Request failed.");
+      return data;
+    }
 
-    function loadDrinks() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (!saved) return sampleDrinks;
+    async function loadDrinks() {
       try {
-        return JSON.parse(saved);
-      } catch {
-        return sampleDrinks;
+        setStatus("Loading drinks...");
+        const data = await api("list");
+        state.drinks = data.drinks || [];
+        render();
+        setStatus(`${state.drinks.length} drink${state.drinks.length === 1 ? "" : "s"} loaded.`);
+      } catch (err) {
+        setStatus(err.message);
+        render();
       }
     }
 
-    function saveDrinks() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(drinks));
-    }
-
-    function filteredDrinks() {
-      const term = search.value.trim().toLowerCase();
-      return drinks.filter(drink => {
-        const text = `${drink.name} ${drink.brand} ${drink.description}`.toLowerCase();
-        const matchesSearch = !term || text.includes(term);
-        const matchesLow = !lowOnly || drink.quantity <= LOW_STOCK_LIMIT;
-        return matchesSearch && matchesLow;
-      });
-    }
-
-    function render() {
-      const list = filteredDrinks();
-      grid.innerHTML = "";
-
-      if (!list.length) {
-        grid.innerHTML = `<div class="empty-state">No drinks match this view.</div>`;
-        return;
-      }
-
-      list.forEach(drink => {
-        const card = document.createElement("article");
-        card.className = "card";
-
-        const quantityClass = drink.quantity === 0 ? "empty" : drink.quantity <= LOW_STOCK_LIMIT ? "low" : "";
-        const photoHtml = drink.photo
-          ? `<img src="${escapeHtml(drink.photo)}" alt="${escapeHtml(drink.name)}" onerror="this.replaceWith(document.createTextNode('🥤'))" />`
-          : "🥤";
-
-        card.innerHTML = `
-          <div class="photo">${photoHtml}</div>
-          <div class="card-body">
-            <div>
-              <div class="brand">${escapeHtml(drink.brand)}</div>
-              <div class="name">${escapeHtml(drink.name)}</div>
-            </div>
-            <div class="desc">${escapeHtml(drink.description || "No description yet.")}</div>
-            <div class="quantity-row">
-              <span>Quantity</span>
-              <span class="quantity ${quantityClass}">${drink.quantity}</span>
-            </div>
-            <div class="actions">
-              <button class="primary wide" data-action="drink" data-id="${drink.id}" ${drink.quantity <= 0 ? "disabled" : ""}>Drink One</button>
-              <button class="success" data-action="addOne" data-id="${drink.id}">+1</button>
-              <button class="success" data-action="addCase" data-id="${drink.id}">+12</button>
-              <button class="secondary" data-action="edit" data-id="${drink.id}">Edit</button>
-              <button class="danger" data-action="delete" data-id="${drink.id}">Delete</button>
-            </div>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      });
-    }
-
-    function updateQuantity(id, amount) {
-      drinks = drinks.map(drink => {
-        if (drink.id !== id) return drink;
-        return { ...drink, quantity: Math.max(0, drink.quantity + amount) };
-      });
-      saveDrinks();
+    async function updateQuantity(id, delta) {
+      const drink = state.drinks.find(d => d.id === id);
+      if (!drink) return;
+      const oldQuantity = Number(drink.quantity || 0);
+      drink.quantity = Math.max(0, oldQuantity + delta);
       render();
+      try {
+        await api("changeQuantity", { id, delta });
+        await loadDrinks();
+      } catch (err) {
+        drink.quantity = oldQuantity;
+        render();
+        setStatus(err.message);
+      }
+    }
+
+    async function saveDrink(event) {
+      event.preventDefault();
+      const name = $("name").value.trim();
+      const id = $("drinkId").value || slugify(`${$("brand").value}-${name}-${$("flavor").value}`);
+      const drink = {
+        id,
+        name,
+        brand: $("brand").value.trim(),
+        flavor: $("flavor").value.trim(),
+        quantity: Number($("quantity").value || 0),
+        photoUrl: $("photo").value.trim(),
+        description: $("description").value.trim(),
+        lowStockThreshold: Number($("threshold").value || 0)
+      };
+      try {
+        await api("upsert", { drink });
+        $("drinkDialog").close();
+        await loadDrinks();
+      } catch (err) { setStatus(err.message); }
+    }
+
+    async function deleteDrink() {
+      const id = $("drinkId").value;
+      if (!id) return $("drinkDialog").close();
+      if (!confirm("Delete this drink from the shared sheet?")) return;
+      try {
+        await api("delete", { id });
+        $("drinkDialog").close();
+        await loadDrinks();
+      } catch (err) { setStatus(err.message); }
     }
 
     function openForm(drink = null) {
-      document.getElementById("dialogTitle").textContent = drink ? "Edit Drink" : "Add Drink";
-      document.getElementById("drinkId").value = drink?.id || "";
-      document.getElementById("name").value = drink?.name || "";
-      document.getElementById("brand").value = drink?.brand || "";
-      document.getElementById("quantity").value = drink?.quantity ?? 0;
-      document.getElementById("photo").value = drink?.photo || "";
-      document.getElementById("description").value = drink?.description || "";
-      dialog.showModal();
+      state.editingId = drink?.id || null;
+      $("dialogTitle").textContent = drink ? "Edit Drink" : "Add Drink";
+      $("deleteDrink").style.display = drink ? "inline-block" : "none";
+      $("drinkId").value = drink?.id || "";
+      $("name").value = drink?.name || "";
+      $("brand").value = drink?.brand || "";
+      $("flavor").value = drink?.flavor || "";
+      $("quantity").value = drink?.quantity ?? 0;
+      $("threshold").value = drink?.lowStockThreshold ?? 3;
+      $("photo").value = drink?.photoUrl || "";
+      $("description").value = drink?.description || "";
+      $("drinkDialog").showModal();
     }
 
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    grid.addEventListener("click", event => {
-      const button = event.target.closest("button");
-      if (!button) return;
-
-      const id = button.dataset.id;
-      const action = button.dataset.action;
-      const drink = drinks.find(item => item.id === id);
-
-      if (action === "drink") updateQuantity(id, -1);
-      if (action === "addOne") updateQuantity(id, 1);
-      if (action === "addCase") updateQuantity(id, 12);
-      if (action === "edit") openForm(drink);
-      if (action === "delete") {
-        if (confirm(`Delete ${drink.name}?`)) {
-          drinks = drinks.filter(item => item.id !== id);
-          saveDrinks();
-          render();
-        }
+    function render() {
+      const query = state.query.toLowerCase();
+      const drinks = state.drinks.filter(d => [d.name, d.brand, d.flavor].join(" ").toLowerCase().includes(query));
+      if (!isConfigured()) {
+        $("drinks").innerHTML = `<div class="empty">Paste your Google Apps Script Web App URL into index.html to connect the shared Google Sheet.</div>`;
+        return;
       }
-    });
+      if (!drinks.length) {
+        $("drinks").innerHTML = `<div class="empty">No drinks found.</div>`;
+        return;
+      }
+      $("drinks").innerHTML = drinks.map(d => {
+        const quantity = Number(d.quantity || 0);
+        const threshold = Number(d.lowStockThreshold || 0);
+        const status = quantity === 0 ? `<span class="out">Out</span>` : quantity <= threshold ? `<span class="low">Low stock</span>` : `<span>In stock</span>`;
+        const photo = d.photoUrl ? `<img src="${escapeHtml(d.photoUrl)}" alt="${escapeHtml(d.name)}" onerror="this.remove()">` : "No photo";
+        return `<article class="card">
+          <div class="photo">${photo}</div>
+          <div class="content">
+            <div class="brand">${escapeHtml(d.brand || "")}</div>
+            <div class="name">${escapeHtml(d.name || "")}</div>
+            <div class="flavor">${escapeHtml(d.flavor || "")}</div>
+            <div class="desc">${escapeHtml(d.description || "")}</div>
+            <div class="count"><span>${status}</span><strong>${quantity}</strong></div>
+            <div class="actions">
+              <button class="take" onclick="updateQuantity('${escapeAttr(d.id)}', -1)" ${quantity <= 0 ? "disabled" : ""}>Drink One</button>
+              <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 1)">+1</button>
+              <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 12)">+12</button>
+              <button class="ghost" onclick='openForm(${JSON.stringify(d).replace(/'/g, "&#39;")})'>Edit</button>
+            </div>
+          </div>
+        </article>`;
+      }).join("");
+    }
 
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-      const id = document.getElementById("drinkId").value || crypto.randomUUID();
-      const updated = {
-        id,
-        name: document.getElementById("name").value.trim(),
-        brand: document.getElementById("brand").value.trim(),
-        quantity: Number(document.getElementById("quantity").value),
-        photo: document.getElementById("photo").value.trim(),
-        description: document.getElementById("description").value.trim()
-      };
+    function escapeHtml(value) { return String(value ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+    function escapeAttr(value) { return String(value ?? "").replace(/'/g, "\\'"); }
 
-      const exists = drinks.some(drink => drink.id === id);
-      drinks = exists
-        ? drinks.map(drink => drink.id === id ? updated : drink)
-        : [updated, ...drinks];
+    $("search").addEventListener("input", e => { state.query = e.target.value; render(); });
+    $("refresh").addEventListener("click", loadDrinks);
+    $("addDrink").addEventListener("click", () => openForm());
+    $("drinkForm").addEventListener("submit", saveDrink);
+    $("cancel").addEventListener("click", () => $("drinkDialog").close());
+    $("deleteDrink").addEventListener("click", deleteDrink);
 
-      saveDrinks();
-      dialog.close();
-      render();
-    });
-
-    document.getElementById("addDrink").addEventListener("click", () => openForm());
-    document.getElementById("cancelDialog").addEventListener("click", () => dialog.close());
-    search.addEventListener("input", render);
-
-    document.getElementById("showLow").addEventListener("click", event => {
-      lowOnly = !lowOnly;
-      event.target.textContent = lowOnly ? "Show All" : "Low Stock";
-      render();
-    });
-
-    document.getElementById("exportData").addEventListener("click", () => {
-      const blob = new Blob([JSON.stringify(drinks, null, 2)], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "fridge-drink-backup.json";
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById("importData").addEventListener("click", () => {
-      document.getElementById("importFile").click();
-    });
-
-    document.getElementById("importFile").addEventListener("change", event => {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const imported = JSON.parse(reader.result);
-          if (!Array.isArray(imported)) throw new Error("Invalid file");
-          drinks = imported;
-          saveDrinks();
-          render();
-        } catch {
-          alert("That backup file could not be imported.");
-        }
-      };
-      reader.readAsText(file);
-    });
-
-    document.getElementById("resetData").addEventListener("click", () => {
-      if (!confirm("Reset to sample data? This replaces your current local inventory.")) return;
-      drinks = sampleDrinks;
-      saveDrinks();
-      render();
-    });
-
-    render();
+    loadDrinks();
   </script>
 </body>
 </html>
