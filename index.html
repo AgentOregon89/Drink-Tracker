@@ -73,38 +73,20 @@
     <section class="toolbar">
       <input id="search" placeholder="Search name, brand, or flavor" />
       <button id="refresh" class="ghost">Refresh</button>
-      <button id="addDrink" class="primary">Add Drink</button>
+
     </section>
     <div id="status" class="status">Loading drinks...</div>
     <section id="drinks" class="grid"></section>
   </main>
 
-  <dialog id="drinkDialog">
-    <form method="dialog" class="modal" id="drinkForm">
-      <h2 id="dialogTitle">Add Drink</h2>
-      <div class="form-grid">
-        <input id="drinkId" type="hidden" />
-        <label>Name<input id="name" required /></label>
-        <label>Brand<input id="brand" required /></label>
-        <label>Flavor<input id="flavor" /></label>
-        <label>Quantity<input id="quantity" type="number" min="0" step="1" required /></label>
-        <label>Low Stock Threshold<input id="threshold" type="number" min="0" step="1" value="3" /></label>
-        <label class="span">Photo URL<input id="photo" placeholder="https://..." /></label>
-        <label class="span">Description<textarea id="description" rows="3"></textarea></label>
-      </div>
-      <div class="modal-actions">
-        <button type="button" id="deleteDrink" class="danger">Delete</button>
-        <button type="button" id="cancel" class="ghost">Cancel</button>
-        <button type="submit" class="primary">Save</button>
-      </div>
-    </form>
-  </dialog>
+  
+  
 
   <script>
     // Paste your deployed Google Apps Script Web App URL here.
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoCN6L3EetzywXzSluzf7My9JlTgeS4m1547UTZQy5dmJjUAYPTw-atNrnlsvNeCkkpA/exec";
 
-    const state = { drinks: [], query: "", editingId: null };
+    const state = { drinks: [], query: "" };
     const $ = (id) => document.getElementById(id);
 
     function setStatus(message) { $("status").textContent = message || ""; }
@@ -153,53 +135,6 @@
       }
     }
 
-    async function saveDrink(event) {
-      event.preventDefault();
-      const name = $("name").value.trim();
-      const id = $("drinkId").value || slugify(`${$("brand").value}-${name}-${$("flavor").value}`);
-      const drink = {
-        id,
-        name,
-        brand: $("brand").value.trim(),
-        flavor: $("flavor").value.trim(),
-        quantity: Number($("quantity").value || 0),
-        photoUrl: $("photo").value.trim(),
-        description: $("description").value.trim(),
-        lowStockThreshold: Number($("threshold").value || 0)
-      };
-      try {
-        await api("upsert", { drink });
-        $("drinkDialog").close();
-        await loadDrinks();
-      } catch (err) { setStatus(err.message); }
-    }
-
-    async function deleteDrink() {
-      const id = $("drinkId").value;
-      if (!id) return $("drinkDialog").close();
-      if (!confirm("Delete this drink from the shared sheet?")) return;
-      try {
-        await api("delete", { id });
-        $("drinkDialog").close();
-        await loadDrinks();
-      } catch (err) { setStatus(err.message); }
-    }
-
-    function openForm(drink = null) {
-      state.editingId = drink?.id || null;
-      $("dialogTitle").textContent = drink ? "Edit Drink" : "Add Drink";
-      $("deleteDrink").style.display = drink ? "inline-block" : "none";
-      $("drinkId").value = drink?.id || "";
-      $("name").value = drink?.name || "";
-      $("brand").value = drink?.brand || "";
-      $("flavor").value = drink?.flavor || "";
-      $("quantity").value = drink?.quantity ?? 0;
-      $("threshold").value = drink?.lowStockThreshold ?? 3;
-      $("photo").value = drink?.photoUrl || "";
-      $("description").value = drink?.description || "";
-      $("drinkDialog").showModal();
-    }
-
     function render() {
       const query = state.query.toLowerCase();
       const drinks = state.drinks.filter(d => [d.name, d.brand, d.flavor].join(" ").toLowerCase().includes(query));
@@ -228,7 +163,6 @@
               <button class="take" onclick="updateQuantity('${escapeAttr(d.id)}', -1)" ${quantity <= 0 ? "disabled" : ""}>Drink One</button>
               <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 1)">+1</button>
               <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 12)">+12</button>
-              <button class="ghost" onclick='openForm(${JSON.stringify(d).replace(/'/g, "&#39;")})'>Edit</button>
             </div>
           </div>
         </article>`;
@@ -240,10 +174,7 @@
 
     $("search").addEventListener("input", e => { state.query = e.target.value; render(); });
     $("refresh").addEventListener("click", loadDrinks);
-    $("addDrink").addEventListener("click", () => openForm());
-    $("drinkForm").addEventListener("submit", saveDrink);
-    $("cancel").addEventListener("click", () => $("drinkDialog").close());
-    $("deleteDrink").addEventListener("click", deleteDrink);
+
 
     loadDrinks();
   </script>
