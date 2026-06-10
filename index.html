@@ -20,90 +20,255 @@
       --shadow: 0 18px 45px rgba(0,0,0,.35);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+
     * { box-sizing: border-box; }
-    body { margin: 0; background: radial-gradient(circle at top, #111827 0, var(--bg) 46rem); color: var(--text); }
-    header { padding: 24px 18px 12px; max-width: 1120px; margin: 0 auto; }
-    h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.06em; }
-    .subtitle { margin: 0; color: var(--muted); font-size: 1rem; }
-    main { max-width: 1120px; margin: 0 auto; padding: 16px 18px 40px; }
-    .toolbar { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 18px 0; }
-    @media (min-width: 760px) { .toolbar { grid-template-columns: 1fr auto auto; align-items: center; } }
-    input, textarea { width: 100%; background: #0b1220; border: 1px solid var(--border); border-radius: 14px; color: var(--text); padding: 14px 15px; font: inherit; outline: none; }
-    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,.16); }
-    button { border: 0; border-radius: 14px; padding: 13px 16px; font-weight: 800; cursor: pointer; color: var(--text); background: var(--panel-2); min-height: 46px; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #111827 0, var(--bg) 46rem);
+      color: var(--text);
+    }
+
+    header {
+      padding: 24px 18px 12px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      letter-spacing: -0.06em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 18px 40px;
+    }
+
+    .toolbar {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      margin: 18px 0;
+    }
+
+    @media (min-width: 760px) {
+      .toolbar {
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+      }
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56,189,248,.16);
+    }
+
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--text);
+      background: var(--panel-2);
+      min-height: 46px;
+    }
+
     button:hover { filter: brightness(1.1); }
-    button:disabled { opacity: .5; cursor: not-allowed; }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
     .primary { background: linear-gradient(135deg, #0284c7, #22c55e); }
     .take { background: linear-gradient(135deg, #dc2626, #f97316); font-size: 1rem; }
     .success { background: #15803d; }
     .ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
     .danger { background: #7f1d1d; }
-    .status { color: var(--muted); min-height: 24px; margin: 12px 0; }
-    .category-section { margin: 28px 0 34px; }
-    .category-title { font-size: 1.6rem; margin: 0 0 14px; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 16px; }    .card { background: rgba(16,24,39,.92); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
-    .photo { height: 180px; background: #0f172a; display: flex; align-items: center; justify-content: center; color: var(--muted); overflow: hidden; }
-    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .status {
+      color: var(--muted);
+      min-height: 24px;
+      margin: 12px 0;
+    }
+
+    .category-section {
+      margin: 28px 0 34px;
+    }
+
+    .category-title {
+      font-size: 1.6rem;
+      margin: 0 0 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(16,24,39,.92);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .photo {
+      height: 180px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .content { padding: 15px; }
-    .brand { color: var(--accent); font-size: .8rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
-    .name { font-size: 1.25rem; font-weight: 900; margin: 4px 0 2px; }
-    .flavor { color: var(--muted); margin-bottom: 10px; }
-    .desc { color: #cbd5e1; min-height: 42px; }
-    .count { display: flex; align-items: baseline; justify-content: space-between; margin: 14px 0; padding: 12px; border-radius: 16px; background: #0b1220; border: 1px solid var(--border); }
-    .count strong { font-size: 2.2rem; line-height: 1; }
+
+    .brand {
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .name {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin: 4px 0 2px;
+    }
+
+    .flavor {
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .desc {
+      color: #cbd5e1;
+      min-height: 42px;
+    }
+
+    .count {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 14px 0;
+      padding: 12px;
+      border-radius: 16px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+    }
+
+    .count strong {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
     .low { color: var(--warning); font-weight: 900; }
     .out { color: var(--danger); font-weight: 900; }
-    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .actions .take { grid-column: 1 / -1; }
-    dialog { width: min(680px, calc(100vw - 24px)); border: 1px solid var(--border); border-radius: 24px; background: #0b1220; color: var(--text); padding: 0; box-shadow: var(--shadow); }
-    dialog::backdrop { background: rgba(0,0,0,.7); }
-    .modal { padding: 18px; }
-    .modal h2 { margin: 0 0 14px; }
-    .form-grid { display: grid; gap: 10px; }
-    @media (min-width: 720px) { .form-grid { grid-template-columns: 1fr 1fr; } .span { grid-column: 1 / -1; } }
-    .modal-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 16px; }
-    .empty { color: var(--muted); padding: 24px; border: 1px dashed var(--border); border-radius: 18px; text-align: center; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .actions .take {
+      grid-column: 1 / -1;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 24px;
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Fridge Drinks</h1>
     <p class="subtitle">Scan, choose a drink, tap Drink One. Counts are shared through Google Sheets.</p>
   </header>
+
   <main>
     <section class="toolbar">
-      <input id="search" placeholder="Search name, brand, or flavor" />
+      <input id="search" placeholder="Search name, brand, flavor, or category" />
       <button id="refresh" class="ghost">Refresh</button>
-
     </section>
+
     <div id="status" class="status">Loading drinks...</div>
-    <section id="drinks" class="grid"></section>
+    <section id="drinks"></section>
   </main>
 
-  
-  
-
   <script>
-    // Paste your deployed Google Apps Script Web App URL here.
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoCN6L3EetzywXzSluzf7My9JlTgeS4m1547UTZQy5dmJjUAYPTw-atNrnlsvNeCkkpA/exec";
 
     const state = { drinks: [], query: "" };
     const $ = (id) => document.getElementById(id);
 
-    function setStatus(message) { $("status").textContent = message || ""; }
-    function isConfigured() { return GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_YOUR"); }
-    function slugify(value) { return String(value || "drink").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+    function setStatus(message) {
+      $("status").textContent = message || "";
+    }
+
+    function isConfigured() {
+      return GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_YOUR");
+    }
 
     async function api(action, payload = {}) {
-      if (!isConfigured()) throw new Error("Add your Google Apps Script Web App URL to index.html first.");
+      if (!isConfigured()) {
+        throw new Error("Add your Google Apps Script Web App URL to index.html first.");
+      }
+
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ action, ...payload })
       });
+
       const data = await response.json();
-      if (!data.ok) throw new Error(data.error || "Request failed.");
+
+      if (!data.ok) {
+        throw new Error(data.error || "Request failed.");
+      }
+
       return data;
     }
 
@@ -123,9 +288,11 @@
     async function updateQuantity(id, delta) {
       const drink = state.drinks.find(d => d.id === id);
       if (!drink) return;
+
       const oldQuantity = Number(drink.quantity || 0);
       drink.quantity = Math.max(0, oldQuantity + delta);
       render();
+
       try {
         await api("changeQuantity", { id, delta });
         await loadDrinks();
@@ -136,80 +303,102 @@
       }
     }
 
-   function render() {
-  const query = state.query.toLowerCase();
-
-  const drinks = state.drinks.filter(d =>
-    [d.name, d.brand, d.flavor, d.category]
-      .join(" ")
-      .toLowerCase()
-      .includes(query)
-  );
-
-  if (!isConfigured()) {
-    $("drinks").innerHTML = `<div class="empty">Paste your Google Apps Script Web App URL into index.html to connect the shared Google Sheet.</div>`;
-    return;
-  }
-
-  if (!drinks.length) {
-    $("drinks").innerHTML = `<div class="empty">No drinks found.</div>`;
-    return;
-  }
-
-  const categories = ["Beer", "Cider", "Soda", "N/A"];
-  let html = "";
-
-  categories.forEach(category => {
-    const sectionDrinks = drinks.filter(d =>
-      String(d.category || "N/A").trim().toLowerCase() === category.toLowerCase()
-    );
-
-    if (!sectionDrinks.length) return;
-
-    html += `
-      <section class="category-section">
-        <h2 class="category-title">${escapeHtml(category)}</h2>
-        <div class="grid">
-    `;
-
-    html += sectionDrinks.map(d => {
+    function renderDrinkCard(d) {
       const quantity = Number(d.quantity || 0);
       const threshold = Number(d.lowStockThreshold || 0);
-      const status = quantity === 0 ? `<span class="out">Out</span>` : quantity <= threshold ? `<span class="low">Low stock</span>` : `<span>In stock</span>`;
-      const photo = d.photoUrl ? `<img src="${escapeHtml(d.photoUrl)}" alt="${escapeHtml(d.name)}" onerror="this.remove()">` : "No photo";
 
-      return `<article class="card">
-        <div class="photo">${photo}</div>
-        <div class="content">
-          <div class="brand">${escapeHtml(d.brand || "")}</div>
-          <div class="name">${escapeHtml(d.name || "")}</div>
-          <div class="flavor">${escapeHtml(d.flavor || "")}</div>
-          <div class="desc">${escapeHtml(d.description || "")}</div>
-          <div class="count"><span>${status}</span><strong>${quantity}</strong></div>
-          <div class="actions">
-            <button class="take" onclick="updateQuantity('${escapeAttr(d.id)}', -1)" ${quantity <= 0 ? "disabled" : ""}>Drink One</button>
-            <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 1)">+1</button>
-            <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 12)">+12</button>
+      const status =
+        quantity === 0
+          ? `<span class="out">Out</span>`
+          : quantity <= threshold
+            ? `<span class="low">Low stock</span>`
+            : `<span>In stock</span>`;
+
+      const photo = d.photoUrl
+        ? `<img src="${escapeHtml(d.photoUrl)}" alt="${escapeHtml(d.name)}" onerror="this.remove()">`
+        : "No photo";
+
+      return `
+        <article class="card">
+          <div class="photo">${photo}</div>
+          <div class="content">
+            <div class="brand">${escapeHtml(d.brand || "")}</div>
+            <div class="name">${escapeHtml(d.name || "")}</div>
+            <div class="flavor">${escapeHtml(d.flavor || "")}</div>
+            <div class="desc">${escapeHtml(d.description || "")}</div>
+            <div class="count"><span>${status}</span><strong>${quantity}</strong></div>
+            <div class="actions">
+              <button class="take" onclick="updateQuantity('${escapeAttr(d.id)}', -1)" ${quantity <= 0 ? "disabled" : ""}>Drink One</button>
+              <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 1)">+1</button>
+              <button class="success" onclick="updateQuantity('${escapeAttr(d.id)}', 12)">+12</button>
+            </div>
           </div>
-        </div>
-      </article>`;
-    }).join("");
+        </article>
+      `;
+    }
 
-    html += `
-        </div>
-      </section>
-    `;
-  });
+    function render() {
+      const query = state.query.toLowerCase();
 
-  $("drinks").innerHTML = html;
-}
+      const drinks = state.drinks.filter(d =>
+        [d.name, d.brand, d.flavor, d.Category]
+          .join(" ")
+          .toLowerCase()
+          .includes(query)
+      );
 
-    function escapeHtml(value) { return String(value ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
-    function escapeAttr(value) { return String(value ?? "").replace(/'/g, "\\'"); }
+      if (!isConfigured()) {
+        $("drinks").innerHTML = `<div class="empty">Paste your Google Apps Script Web App URL into index.html to connect the shared Google Sheet.</div>`;
+        return;
+      }
 
-    $("search").addEventListener("input", e => { state.query = e.target.value; render(); });
+      if (!drinks.length) {
+        $("drinks").innerHTML = `<div class="empty">No drinks found.</div>`;
+        return;
+      }
+
+      const categories = ["Beer", "Cider", "Soda", "N/A"];
+      let html = "";
+
+      categories.forEach(category => {
+        const sectionDrinks = drinks.filter(d =>
+          String(d.Category || "N/A").trim().toLowerCase() === category.toLowerCase()
+        );
+
+        if (!sectionDrinks.length) return;
+
+        html += `
+          <section class="category-section">
+            <h2 class="category-title">${escapeHtml(category)}</h2>
+            <div class="grid">
+              ${sectionDrinks.map(renderDrinkCard).join("")}
+            </div>
+          </section>
+        `;
+      });
+
+      $("drinks").innerHTML = html;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"]/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;"
+      }[c]));
+    }
+
+    function escapeAttr(value) {
+      return String(value ?? "").replace(/'/g, "\\'");
+    }
+
+    $("search").addEventListener("input", e => {
+      state.query = e.target.value;
+      render();
+    });
+
     $("refresh").addEventListener("click", loadDrinks);
-
 
     loadDrinks();
   </script>
